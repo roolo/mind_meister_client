@@ -1,5 +1,7 @@
 # Mind Meister Ruby client
 
+[![Join the chat at https://gitter.im/roolo/mind_meister_client](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/roolo/mind_meister_client?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Client for API of web based and mobile mind mapping app -- [MindMeister](https://www.mindmeister.com)
 
 ## Installation
