@@ -1,4 +1,5 @@
 module MindMeisterClient
+  # Before continuing another call to MM API is required
   class ApiCallRequiredError < Exception
     attr_accessor :msg
     attr_accessor :template

@@ -3,17 +3,23 @@ require 'mind_meister_client/version'
 require 'mind_meister_client/request_error'
 require 'mind_meister_client/api_call_required_error'
 
-
-# Before using this client you need to register your app at https://www.mindmeister.com/api -- API Keys
+# Before using this client you need to register your app at https://www.mindmeister.com/api -- API Keys.
 # For list of all available methods refer to https://www.mindmeister.com/developers/explore
 module MindMeisterClient
+  # Handles all request wise stuff
   class Requester
     MM_API_SCOPES   = %w( auth boundaries connections files folders ideas images maps people realtime reflection tasks
                           test themes user)
     SERVER_ADDRESS  = 'www.mindmeister.com'
 
+    # @!attribute api_key
+    #   @return [String]
     attr_accessor :api_key
+    # @!attribute auth_token
+    #   @return [String]
     attr_accessor :auth_token
+    # @!attribute http_client
+    #   @return [Net::HTTP]
     attr_accessor :http_client
 
     def initialize api_key, secret_key, auth_token = nil
@@ -126,6 +132,7 @@ module MindMeisterClient
     # This is helper for method_missing method of this class
     #
     # @param [Symbol] ruby_method_name
+    #
     # @return [String]
     def prepare_api_method ruby_method_name
       rmn_parts = ruby_method_name.to_s.split('_')
@@ -160,5 +167,499 @@ module MindMeisterClient
 
       query_string_params + '&api_sig=' + signature
     end
+
+    # @!group MindMeister API methods
+
+    #
+    # List of virtual methods from MM API
+    #   Taken from https://www.mindmeister.com/developers/explore
+    #
+
+    #
+    # auth
+    #
+
+    # @!method auth_check_token
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method auth_get_frob
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method auth_get_token
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # boundaries
+    #
+
+    # @!method boundaries_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method boundaries_change
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method boundaries_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # connections
+    #
+
+    # @!method connections_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method connections_change_color
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method connections_change_control_points
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method connections_change_label
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method connections_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # files
+    #
+
+    # @!method files_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # folders
+    #
+
+    # @!method folders_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method folders_contents
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method folders_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method folders_get_list
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method folders_move
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method folders_rename
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # ideas
+    #
+
+    # @!method ideas_add_attachment
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_change
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_delete_attachment
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_get_map
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_insert
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_move
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_remove_style
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_set_style
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method ideas_toggle_closed
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # images
+    #
+
+    # @!method images_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method images_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method images_upload
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # maps
+    #
+
+    # @!method maps_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_duplicate
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_export
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_channel
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_collaborators
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_list
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_map
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_notification
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_public_list
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_public_map
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_slides
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_get_templates
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_history
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_import
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_insert_geistesblitz
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_link_share
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_move
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_new_from_template
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_publish
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_redo
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_remove_link_share
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_revert
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_set_meta_data
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_set_notification
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_set_properties
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_set_theme
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_share
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_un_publish
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_un_share
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_undo
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method maps_withdraw
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # people
+    #
+
+    # @!method people_get_friends
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method people_get_info
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # realtime
+    #
+
+    # @!method realtime_do
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method realtime_poll
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # reflection
+    #
+
+    # @!method reflection_api_version
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method reflection_get_method_info
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method reflection_get_methods
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # tasks
+    #
+
+    # @!method tasks_add
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method tasks_delete
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method tasks_set_notification
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # test
+    #
+
+    # @!method test_echo Dum dum dummy
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method test_login
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method test_null
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # themes
+    #
+
+    # @!method themes_default_list
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method themes_templates
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    #
+    # user
+    #
+
+    # @!method user_browser_login
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method user_external_login
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method user_get_groups
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method user_get_styles
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method user_get_team_themes
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method user_mobile_login
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!method user_mobile_signup
+    #   @param [Hash] params
+    #
+    #   @return [Hash] Data from MM API
+
+    # @!endgroup
   end
 end

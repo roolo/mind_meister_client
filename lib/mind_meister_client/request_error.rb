@@ -1,4 +1,5 @@
 module MindMeisterClient
+  # Error occurred during request call
   class RequestError < Exception
     # Object not found
     MM_ERROR_OBJECT_NOT_FOUND = 20
@@ -14,7 +15,7 @@ module MindMeisterClient
     MM_ERROR_INVALID_API_KEY = 100
     # The specified frob does not exist or has already been used.
     MM_ERROR_INVALID_FROB = 108
-    #The requested method was not found.
+    # The requested method was not found.
     MM_ERROR_METHOD_NOT_FOUND = 112
 
     attr_accessor :code
